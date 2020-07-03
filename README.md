@@ -39,7 +39,7 @@ Duration can be set for the cache entry with a Bean called CacheManager
 3. Use hashOperations provided by Spring Boot in the Repository
 4. Use HashOperations to perform the CRUD operation
 5. Go to postman and enter the url http://localhost:8099/redis/addUser and enter the payload for the post method
-6. For update, use http://localhost:8099/redis/update with the payload
+6. For update, use http://localhost:8099/redis/update/1 with the payload
 7. FindAll users, http://localhost:8099/redis/findAll
 8. Get a user, http://localhost:8099/redis/getUser/1
 9. Delete a user, http://localhost:8099/redis/delete/1
