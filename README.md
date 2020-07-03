@@ -32,6 +32,10 @@ There are 2 types of Java Redis clients namely
 
 Duration can be set for the cache entry with a Bean called CacheManager
 
+#MessageBroker
+
+- Redis can also be used as Message Broker with Publish and Subscribe
+
 #Steps
 
 1. Create a Jedis Connection Fcatory and set it to the RedisTemplate
