@@ -12,7 +12,7 @@ Redis is used as a cache while mysql is used a database for CRUD operations in t
 
 There are 2 types of Java Redis clients namely
 
-1. Jedis (Synchronous and single threaded. Easy to use
+1. Jedis (Synchronous and single threaded. Easy to use )
 2. Lettuce ( uses asynchronous and reactive API. Multithreaded. difficult to use)
 
 #Replication
