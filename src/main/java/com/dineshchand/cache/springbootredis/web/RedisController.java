@@ -1,7 +1,8 @@
-package com.dineshchand.cache.springbootredis.resource;
+package com.dineshchand.cache.springbootredis.web;
 
 import java.util.Optional;
 
+import com.dineshchand.cache.springbootredis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -16,50 +17,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dineshchand.cache.springbootredis.model.User;
-import com.dineshchand.cache.springbootredis.repository.UserDatabaseRepo;
 
 @RestController
 @RequestMapping("/redis")
-public class RedisResource {
+public class RedisController {
 	
 	@Autowired
-    private UserDatabaseRepo userRepository;
+    private UserService userService;
 
     @PostMapping("/adduser")
-   // @CachePut(value="users",key="#user.id")
-    //dont put in cache during add. Otherwise cache will be full
     public User save(@RequestBody User user){
-        userRepository.save(user);
+        userService.addUser(user);
         return user;
     }
 
     @GetMapping("/findall")
     public Iterable<User> list(){
-        return userRepository.findAll();
+        return userService.findAllUsers();
     }
 
     @GetMapping("/getuser/{id}")
     @Cacheable(value="users",key="#id")
-    public Optional<User> getUser(@PathVariable String id){
+    public User getUser(@PathVariable String id){
     	System.out.println("retrieving users from Database*********");
-        return userRepository.findById(id);
+        return userService.findUser(id);
     }
 
     @PutMapping("/update/{id}")
-    @CachePut(value="users",key="#id")
     public User update(@RequestBody User user,@PathVariable String id){
     	System.out.println("inside update");
-    	User oldUser = userRepository.findById(id).orElse(null);
+    	User oldUser = userService.findUser(id);
     	oldUser.setName(user.getName());
     	oldUser.setAge(user.getAge());
-        final User updatedUser = userRepository.save(oldUser);
+        final User updatedUser = userService.updateUser(user);
         return updatedUser;
     }
 
     @DeleteMapping("/delete/{id}")
-    @CacheEvict(value="users",key="#id")
     public String deleteUser(@PathVariable String id){
-        userRepository.deleteById(id);
+        userService.deleteUser(id);
         return id;
     }
 }
