@@ -37,9 +37,7 @@ public class RedisController {
     }
 
     @GetMapping("/getuser/{id}")
-    @Cacheable(value="users",key="#id")
     public User getUser(@PathVariable String id){
-    	System.out.println("retrieving users from Database*********");
         return userService.findUser(id);
     }
 

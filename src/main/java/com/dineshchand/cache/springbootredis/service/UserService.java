@@ -40,6 +40,7 @@ public class UserService {
 
 	@Cacheable(value="users",key="#id")
 	public User findUser(String id) {
+		System.out.println("retrieving users from Database*********");
 		Optional<User> maybeUser =  userDatabaseRepo.findById(id);
 		return maybeUser.orElse(null);
 	}
