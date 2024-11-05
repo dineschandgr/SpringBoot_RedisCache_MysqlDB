@@ -31,12 +31,12 @@ public class RedisController {
         return user;
     }
 
-    @GetMapping("/findall")
+    @GetMapping("/users")
     public Iterable<User> list(){
         return userService.findAllUsers();
     }
 
-    @GetMapping("/getuser/{id}")
+    @GetMapping("/user/{id}")
     public User getUser(@PathVariable String id){
         return userService.findUser(id);
     }
@@ -47,7 +47,7 @@ public class RedisController {
     	User oldUser = userService.findUser(id);
     	oldUser.setName(user.getName());
     	oldUser.setAge(user.getAge());
-        final User updatedUser = userService.updateUser(user);
+        final User updatedUser = userService.updateUser(id, user);
         return updatedUser;
     }
 

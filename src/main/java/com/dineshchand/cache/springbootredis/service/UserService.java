@@ -34,7 +34,7 @@ public class UserService {
 	}
 
 	@CachePut(value="users",key="#id")
-	public User updateUser(User user) {
+	public User updateUser(String id,User user) {
 		return userDatabaseRepo.save(user);
 	}
 
